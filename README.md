@@ -44,12 +44,12 @@ Final Answer with Sources
 
 ## 🛠️ Features
 
-* ✅ Multi-format support (PDF, DOCX, CSV, XLSX)
-* ✅ Tool-based dynamic retrieval
-* ✅ Policy-driven reasoning (BPSS rules)
-* ✅ Contradiction detection across sources
-* ✅ Source-level citations (`[SOURCE:]`)
-* ✅ Interactive + batch execution modes
+ ✅ Multi-format support (PDF, DOCX, CSV, XLSX)
+ ✅ Tool-based dynamic retrieval
+ ✅ Policy-driven reasoning (BPSS rules)
+ ✅ Contradiction detection across sources
+ ✅ Source-level citations (`[SOURCE:]`)
+ ✅ Interactive + batch execution modes
 ![alt text](<BPSS Agentic AI system architecture.png>)
 
 
