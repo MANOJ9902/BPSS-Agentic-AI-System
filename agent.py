@@ -10,14 +10,9 @@ from typing import Optional
 
 import pandas as pd
 from pypdf import PdfReader
-
-# ── New google-genai SDK ─────────────────────────────────────────────────────
 from google import genai
 from google.genai import types
 
-# ─────────────────────────────────────────────────────────────────────────────
-# Configuration
-# ─────────────────────────────────────────────────────────────────────────────
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
@@ -25,7 +20,7 @@ DATA_DIR   = Path(os.environ.get("BPSS_DATA_DIR", "./data"))
 MODEL      = "gemini-2.5-flash"
 MAX_TOKENS = 4096
 
-# Analyst review dates per candidate (from dataset)
+
 REVIEW_DATES: dict[str, date] = {
     "CAND-101": date(2026, 2, 11),
     "CAND-102": date(2026, 2,  4),
@@ -406,7 +401,7 @@ class BPSSAgent:
         self._log(f"QUESTION: {question}")
         self._log(self._separator('='))
 
-        # Append the user turn to history
+       
         self._history.append(
             types.Content(role="user", parts=[types.Part(text=question)])
         )
@@ -418,17 +413,17 @@ class BPSSAgent:
             response = self._send_with_retry(self._history)
             candidate = response.candidates[0]
 
-            # Append model response to history
+         
             self._history.append(candidate.content)
 
-            # Collect function calls
+            
             function_calls = [
                 part.function_call
                 for part in candidate.content.parts
                 if part.function_call is not None
             ]
 
-            # No tool calls → extract and return final answer
+            
             if not function_calls:
                 answer = "\n".join(
                     part.text
@@ -442,7 +437,7 @@ class BPSSAgent:
                 self._log(self._separator())
                 return answer
 
-            # Execute tools and build function-response turn
+           
             response_parts = []
             for fc in function_calls:
                 inputs = dict(fc.args) if fc.args else {}
@@ -464,7 +459,7 @@ class BPSSAgent:
                     )
                 )
 
-            # Append tool results to history and loop
+           
             self._history.append(
                 types.Content(role="tool", parts=response_parts)
             )
