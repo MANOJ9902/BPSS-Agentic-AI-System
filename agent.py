@@ -22,7 +22,7 @@ from google.genai import types
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 DATA_DIR   = Path(os.environ.get("BPSS_DATA_DIR", "./data"))
-MODEL      = "gemini-2.0-flash"
+MODEL      = "gemini-2.5-flash"
 MAX_TOKENS = 4096
 
 # Analyst review dates per candidate (from dataset)
